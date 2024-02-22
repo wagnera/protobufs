@@ -618,6 +618,17 @@ message ModuleConfig {
   }
 
   /*
+  * Led matrix Config
+  */
+  message LedMatrixConfig {
+    /*
+     * Enable the LedMatrixModule
+     */
+    bool enabled = 1;
+  }
+
+
+  /*
    * TODO: REPLACE
    */
   oneof payload_variant {
@@ -680,6 +691,11 @@ message ModuleConfig {
      * TODO: REPLACE
      */
     DetectionSensorConfig detection_sensor = 12;
+
+    /*
+     * TODO: REPLACE
+     */
+    LedMatrixConfig led_matrix = 14;
   }
 }
 

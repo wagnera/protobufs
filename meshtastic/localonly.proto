@@ -122,6 +122,11 @@ message LocalModuleConfig {
   ModuleConfig.DetectionSensorConfig detection_sensor = 13;
 
   /*
+   * The part of the config that is specific to the Led Matrix module
+   */
+  ModuleConfig.LedMatrixConfig led_matrix = 14;
+
+  /*
    * A version integer used to invalidate old save files when we make
    * incompatible changes This integer is set at build time and is private to
    * NodeDB.cpp in the device code.
