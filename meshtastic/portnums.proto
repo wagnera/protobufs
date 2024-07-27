@@ -48,28 +48,28 @@ enum PortNum {
 
   /*
    * The built-in position messaging app.
-   * Payload is a [Position](/docs/developers/protobufs/api#position) message
+   * Payload is a Position message.
    * ENCODING: Protobuf
    */
   POSITION_APP = 3;
 
   /*
    * The built-in user info app.
-   * Payload is a [User](/docs/developers/protobufs/api#user) message
+   * Payload is a User message.
    * ENCODING: Protobuf
    */
   NODEINFO_APP = 4;
 
   /*
    * Protocol control packets for mesh protocol use.
-   * Payload is a [Routing](/docs/developers/protobufs/api#routing) message
+   * Payload is a Routing message.
    * ENCODING: Protobuf
    */
   ROUTING_APP = 5;
 
   /*
    * Admin control packets.
-   * Payload is a [AdminMessage](/docs/developers/protobufs/api#adminmessage) message
+   * Payload is a AdminMessage message.
    * ENCODING: Protobuf
    */
   ADMIN_APP = 6;
@@ -85,7 +85,7 @@ enum PortNum {
 
   /*
    * Waypoint payloads.
-   * Payload is a [Waypoint](/docs/developers/protobufs/api#waypoint) message
+   * Payload is a Waypoint message.
    * ENCODING: Protobuf
    */
   WAYPOINT_APP = 8;
@@ -101,6 +101,7 @@ enum PortNum {
 
   /*
    * Same as Text Message but originating from Detection Sensor Module.
+   * NOTE: This portnum traffic is not sent to the public MQTT starting at firmware version 2.2.9
    */
   DETECTION_SENSOR_APP = 10;
 
@@ -116,6 +117,12 @@ enum PortNum {
    * ENCODING: IP Packet. Handled by the python API, firmware ignores this one and pases on.
    */
   IP_TUNNEL_APP = 33;
+
+  /*
+   * Paxcounter lib included in the firmware
+   * ENCODING: protobuf
+   */
+  PAXCOUNTER_APP = 34;
 
   /*
    * Provides a hardware serial interface to send and receive from the Meshtastic network.
@@ -137,6 +144,7 @@ enum PortNum {
   /*
    * Optional port for messages for the range test module.
    * ENCODING: ASCII Plaintext
+   * NOTE: This portnum traffic is not sent to the public MQTT starting at firmware version 2.2.9
    */
   RANGE_TEST_APP = 66;
 
@@ -176,6 +184,22 @@ enum PortNum {
    * ENCODING: Protobuf
    */
   NEIGHBORINFO_APP = 71;
+
+  /*
+   * ATAK Plugin
+   * Portnum for payloads from the official Meshtastic ATAK plugin
+   */
+  ATAK_PLUGIN = 72;
+
+  /*
+   * Provides unencrypted information about a node for consumption by a map via MQTT
+   */
+  MAP_REPORT_APP = 73;
+
+  /*
+   * PowerStress based monitoring support (for automated power consumption testing)
+   */
+  POWERSTRESS_APP = 74;
 
   /*
    * Private applications should use portnums >= 256.
