@@ -7,6 +7,7 @@ import "meshtastic/config.proto";
 import "meshtastic/connection_status.proto";
 import "meshtastic/mesh.proto";
 import "meshtastic/module_config.proto";
+import "meshtastic/device_ui.proto";
 
 option csharp_namespace = "Meshtastic.Protobufs";
 option go_package = "github.com/meshtastic/go/generated";
@@ -20,6 +21,14 @@ option swift_prefix = "";
  * (Prior to 1.2 these operations were done via special ToRadio operations)
  */
 message AdminMessage {
+
+  /*
+   * The node generates this key and sends it with any get_x_response packets.
+   * The client MUST include the same key with any set_x commands. Key expires after 300 seconds.
+   * Prevents replay attacks for admin messages.
+   */
+  bytes session_passkey = 101;
+
   /*
    * TODO: REPLACE
    */
@@ -58,6 +67,21 @@ message AdminMessage {
      * TODO: REPLACE
      */
     BLUETOOTH_CONFIG = 6;
+
+    /*
+     * TODO: REPLACE
+     */
+    SECURITY_CONFIG = 7;
+
+    /*
+     *
+     */
+    SESSIONKEY_CONFIG = 8;
+
+    /*
+     * device-ui config
+     */
+    DEVICEUI_CONFIG = 9;
   }
 
   /*
@@ -306,6 +330,37 @@ message AdminMessage {
     bool remove_fixed_position = 42;
 
     /*
+     * Set time only on the node
+     * Convenience method to set the time on the node (as Net quality) without any other position data
+     */
+    fixed32 set_time_only = 43;
+
+    /*
+     * Tell the node to send the stored ui data.
+     */
+    bool get_ui_config_request = 44;
+
+    /*
+     * Reply stored device ui data.
+     */
+    DeviceUIConfig get_ui_config_response = 45;
+
+    /*
+     * Tell the node to store UI data persistently.
+     */
+    DeviceUIConfig store_ui_config = 46;
+
+    /*
+     * Set specified node-num to be ignored on the NodeDB on the device
+     */
+    uint32 set_ignored_node = 47;
+
+    /*
+     * Set specified node-num to be un-ignored on the NodeDB on the device
+     */
+    uint32 remove_ignored_node = 48;
+
+    /*
      * Begins an edit transaction for config, module config, owner, and channel settings changes
      * This will delay the standard *implicit* save to the file system and subsequent reboot behavior until committed (commit_edit_settings)
      */
@@ -315,6 +370,11 @@ message AdminMessage {
      * Commits an open transaction for any edits made to config, module config, owner, and channel settings
      */
     bool commit_edit_settings = 65;
+
+    /*
+     * Tell the node to factory reset config everything; all device state and configuration will be returned to factory defaults and BLE bonds will be cleared.
+     */
+    int32 factory_reset_device = 94;
 
     /*
      * Tell the node to reboot into the OTA Firmware in this many seconds (or <0 to cancel reboot)
@@ -339,9 +399,9 @@ message AdminMessage {
     int32 shutdown_seconds = 98;
 
     /*
-     * Tell the node to factory reset, all device settings will be returned to factory defaults.
+     * Tell the node to factory reset config; all device state and configuration will be returned to factory defaults; BLE bonds will be preserved.
      */
-    int32 factory_reset = 99;
+    int32 factory_reset_config = 99;
 
     /*
      * Tell the node to reset the nodedb.

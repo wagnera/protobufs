@@ -3,3 +3,9 @@
 
 *EnvironmentMetrics.iaq int_size:16
 *EnvironmentMetrics.wind_direction int_size:16
+
+*LocalStats.num_online_nodes int_size:16
+*LocalStats.num_total_nodes int_size:16
+
+*HealthMetrics.heart_bpm int_size:8
+*HealthMetrics.spO2 int_size:8
