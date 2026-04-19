@@ -865,6 +865,19 @@ message ModuleConfig {
      * Enable the LedMatrixModule
      */
     bool enabled = 1;
+
+    /*
+     * DFPlayer volume level (0-30). Default 15.
+     */
+    uint32 dfplayer_volume = 2;
+
+    /*
+     * Audio file numbers (1-based) to play for each text message slot.
+     * Index 0 maps to text_messages[0], index 1 to text_messages[1], etc.
+     * A value of 0 means no sound for that slot.
+     * Files on SD card: 0001.mp3, 0002.mp3, etc.
+     */
+    repeated uint32 audio_file_map = 3;
   }
 
   /*
