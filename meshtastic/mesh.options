@@ -31,6 +31,9 @@
 *MyNodeInfo.air_period_tx       max_count:8
 *MyNodeInfo.air_period_rx       max_count:8
 
+*MyNodeInfo.firmware_edition int_size:8
+*MyNodeInfo.nodedb_count int_size:16
+
 # Note: the actual limit (because of header bytes) on the size of encrypted payloads is 251 bytes, but I use 256
 # here because we might need to fill with zeros for padding to encryption block size (16 bytes per block)
 *MeshPacket.encrypted max_size:256
@@ -57,6 +60,23 @@
 *FileInfo.file_name max_size:228
 
 *ClientNotification.message max_size:400
+
+*KeyVerificationNumberInform.remote_longname max_size:40
+*KeyVerificationNumberRequest.remote_longname max_size:40
+*KeyVerificationFinal.remote_longname max_size:40
+*KeyVerificationFinal.verification_characters max_size:10
+
+*KeyVerification.hash1 max_size:32
+*KeyVerification.hash2 max_size:32
+
+*StoreForwardPlusPlus.message_hash max_size:32
+*StoreForwardPlusPlus.commit_hash max_size:32
+*StoreForwardPlusPlus.root_hash max_size:32
+*StoreForwardPlusPlus.message max_size:240
+
+*RemoteShell.payload max_size:200
+
+*StatusMessage.status max_size:80
 
 # MyMessage.name         max_size:40 
 # or fixed_length or fixed_count, or max_count
